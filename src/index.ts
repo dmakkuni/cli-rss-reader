@@ -16,7 +16,7 @@ async function fetchFeed(url: string) {
     console.log(`=== ${feed.title || 'RSS Feed'} ===`);
     console.log(`${feed.description || ''}\n`);
 
-    feed.items.slice(0, 5).forEach((item, index) => {
+    feed.items.slice(0, 5).forEach((item: CustomItem, index: number) => {
       console.log(`${index + 1}. ${item.title}`);
       console.log(`   Link: ${item.link}`);
       console.log(`   Published: ${item.pubDate ? new Date(item.pubDate).toLocaleDateString() : 'Unknown'}\n`);
@@ -26,6 +26,8 @@ async function fetchFeed(url: string) {
   }
 }
 
-// Pass any valid RSS feed URL as a command-line argument, defaults to Hacker News
+// Pass any valid RSS feed URL as a command-line argument, defaults to Hacker News.
 const targetUrl = process.argv[2] || 'https://news.ycombinator.com/rss';
+declare const process: { argv: string[] };
+
 fetchFeed(targetUrl);
